@@ -1,20 +1,31 @@
-const insert = document.getElementById('insert');
+const loveMe = document.querySelector('.loveMe');
+const times = document.querySelector('#times');
+let timesClicked = 0;
 
-window.addEventListener('keydown', (e) => {
-    insert.innerHTML = `
-    <div class="key">
-        ${e.key === ' ' ? 'Space' : e.key}
-            <small>event.key</small>
-        </div>
-        <div class="key">
-            ${e.keyCode}
-            <small>event.keyCode</small>
-        </div>
-        <div class="key">
-            ${e.code}
-            <small>event.code</small>
-        </div>
-        `
+loveMe.addEventListener('dblclick', (e) => {
+    createHeart(e);
+
 })
 
+const createHeart = (e) => {
+    const heart = document.createElement('i');
+    heart.classList.add('fas');
+    heart.classList.add('fa-heart');
 
+    const x = e.clientX;
+    const y = e.clientY;
+
+    const leftOffset = e.target.offsetLeft
+    const topOffset = e.target.offsetTop;
+
+    const xInside = x - leftOffset;
+    const yInside = y - topOffset;
+
+    heart.style.top = `${yInside}px`;
+    heart.style.left = `${xInside}px`;
+
+    loveMe.appendChild(heart);
+
+    times.innerHTML = ++timesClicked;
+
+}
